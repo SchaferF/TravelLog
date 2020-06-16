@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable, ReplaySubject } from "rxjs";
 import { AuthResponse } from "../models/auth-response";
 import { HttpClient } from "@angular/common/http";
-import { map } from "rxjs/operators";
+import { tap, map } from "rxjs/operators";
 import { User } from "../models/user";
 import { AuthRequest } from "../models/auth-request";
 
@@ -25,9 +25,9 @@ export class AuthService {
   constructor(private http: HttpClient) {
     // Get the credentials from the localStorage when the AuthService is created
     // It will either contains an AuthResponse object of null if it does not exist
-    // const savedAuth = JSON.parse(
-    //   localStorage.getItem(STORAGE_KEY)
-    // ) as AuthResponse;
+    const savedAuth = JSON.parse(
+       localStorage.getItem(STORAGE_KEY)
+    ) as AuthResponse;
     // Create the ReplaySubject and configure it so that it emits the latest emitted value on each subscription
     this.authenticated$ = new ReplaySubject(1);
     // Emit a null value as the initial value
@@ -64,6 +64,10 @@ export class AuthService {
    */
   login(authRequest: AuthRequest): Observable<User> {
     return this.http.post<AuthResponse>(`${apiUrl}/auth`, authRequest).pipe(
+      // The tap operator allows you to do something with an observable's emitted value
+      // and emit it again unaltered.
+      // In our case, we just store this AuthResponse in the localStorage
+      tap((response) => this.saveAuth(response)),
       map((response) => {
         this.authenticated$.next(response);
         console.log(`User ${response.user.name} logged in`);
@@ -76,7 +80,13 @@ export class AuthService {
    * Logs out a user and emit an empty AuthResponse
    */
   logout() {
+    //Remove the AuthResponse from the localStorage when user logs out
+    localStorage.removeItem(STORAGE_KEY);
     this.authenticated$.next(null);
     console.log("User logged out");
+  }
+
+  private saveAuth(auth: AuthResponse) {
+    localStorage.s(STORAGE_KEY, JSON.stringify(auth));
   }
 }
