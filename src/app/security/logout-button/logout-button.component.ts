@@ -6,13 +6,9 @@ import { Router } from "@angular/router";
   selector: 'app-logout-button',
   template: '<button (click)="logout()">Logout</button>',
 })
-export class LogoutButtonComponent implements OnInit {
+export class LogoutButtonComponent {
 
   constructor(private auth: AuthService, private router: Router) { }
-
-  ngOnInit() {
-    
-  }
 
   logout(): void {
     this.auth.logout();

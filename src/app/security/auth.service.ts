@@ -87,6 +87,6 @@ export class AuthService {
   }
 
   private saveAuth(auth: AuthResponse) {
-    localStorage.s(STORAGE_KEY, JSON.stringify(auth));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(auth));
   }
 }
