@@ -6,7 +6,7 @@ import { tap, map } from "rxjs/operators";
 import { User } from "../models/user";
 import { AuthRequest } from "../models/auth-request";
 
-// TODO: Insert here your personnal api URL
+
 const apiUrl = "https://masrad-2020-tl-florian.herokuapp.com/api";
 
 const STORAGE_KEY = "auth";
