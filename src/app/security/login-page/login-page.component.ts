@@ -25,6 +25,7 @@ export class LoginPageComponent {
   constructor(private auth: AuthService, private router: Router) {
     this.authRequest = new AuthRequest();
     this.loginError = false;
+
   }
 
   /**
@@ -42,6 +43,7 @@ export class LoginPageComponent {
         error: (err) => {
           this.loginError = true;
           console.warn(`Authentication failed: ${err.message}`);
+          alert(`\nLogin failed.\nThe username or the password is not valid!`)
         },
       });
     }

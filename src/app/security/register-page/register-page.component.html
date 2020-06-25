@@ -1,5 +1,5 @@
 <div>
-  <form #loginForm="ngForm" (submit)="onSubmit(loginForm)">
+  <form #registerForm="ngForm" (submit)="onRegister(registerForm)">
     <div>
       <label for="username">Username</label>
       <input
@@ -8,7 +8,7 @@
         id="username"
         #usernameField="ngModel"
         required
-        [(ngModel)]="authRequest.username"
+        [(ngModel)]="regRequest.name"
       />
       <p *ngIf="usernameField.hasError('required') && usernameField.touched">
         Username is required
@@ -22,16 +22,16 @@
         id="passwrod"
         #passwordField="ngModel"
         required
-        [(ngModel)]="authRequest.password"
+        [(ngModel)]="regRequest.password"
       />
       <p *ngIf="passwordField.hasError('required') && passwordField.touched">
         Password is required
       </p>
     </div>
     <div>
-      <button type="submit" [disabled]="loginForm.invalid">Log in</button>
-      <p *ngIf="loginError">
-        Unable to log in. See the log for more information.
+      <button type="submit" [disabled]="registerForm.invalid">Register</button>
+      <p *ngIf="registerError">
+        Unable to register. See the log for more information.
       </p>
     </div>
   </form>
