@@ -35,11 +35,14 @@ export class RegisterPageComponent {
       this.registerError = false;
       //Perform the authenthication request to the API.
       this.reg.register(this.regRequest).subscribe({
-        next: () => this.router.navigateByUrl("/"),
+        next: () => {
+          this.router.navigateByUrl("/")
+          alert(`\nRegistration done!`);
+        },
         error: (err) => {
           this.registerError = true;
           console.warn(`Registartion failed: ${err.message}`);
-          alert(`\nRegister failed.\nThe username already exist or the passrowd is not valid!`)
+          alert(`\nRegister failed.\nThe username already exist or the passrowd is not valid!`);
         },
       })
     }

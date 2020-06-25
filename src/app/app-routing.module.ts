@@ -10,7 +10,7 @@ const routes: Routes = [
   // Add this default route to redirect to dummy
   { path: "", redirectTo: "dummy", pathMatch: "full" },
   { path: "login", component: LoginPageComponent },
-  { path: "register", component: RegisterPageComponent },
+  { path: "registration", component: RegisterPageComponent },
   // Add the route to display the dummy page
   {
     path: "dummy",

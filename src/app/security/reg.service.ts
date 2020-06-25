@@ -19,11 +19,11 @@ export class RegService {
   /**
    * Register a new account
    */
-  register(regRequest: RegRequest): Observable<User> {
+  register(regRequest: RegRequest): Observable<RegResponse> {
     return this.http.post<RegResponse>(`${environment.apiUrl}/users`, regRequest).pipe(
       map((response) => {
-        console.log(`User ${response.user.name} register in`);
-        return response.user;
+        console.log(`User ${response.name} register in`);
+        return response;
       })
 
     );
