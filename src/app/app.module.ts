@@ -6,6 +6,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { DummyPageComponent } from './dummy-page/dummy-page.component';
 import { SecurityModule } from './security/security.module';
 import { ApiTokenInterceptorService } from './api/api-token-interceptor.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ApiTokenInterceptorService } from './api/api-token-interceptor.service'
     AppRoutingModule,
     HttpClientModule,
     SecurityModule,
+    BrowserAnimationsModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

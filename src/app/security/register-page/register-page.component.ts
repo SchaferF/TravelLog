@@ -20,6 +20,7 @@ export class RegisterPageComponent {
    * If true, it means that the authentication API has return a failed response
    */
   registerError: boolean;
+  
   constructor(private reg: RegService, private router: Router) {
     this.regRequest = new RegRequest();
     this.registerError = false;    

@@ -36,7 +36,9 @@ export class AuthService {
    * Checks if the user is authenticated by casting the latest AuthResponse value as a boolean
    */
   isAuthenticated(): Observable<boolean> {
-    return this.authenticated$.pipe(map((auth) => Boolean(auth)));
+    return this.authenticated$.pipe(
+      map((auth) => Boolean(auth))
+    );
   }
 
   /**
