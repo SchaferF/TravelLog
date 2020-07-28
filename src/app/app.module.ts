@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { DummyPageComponent } from './dummy-page/dummy-page.component';
 import { SecurityModule } from './security/security.module';
+import { TripsModule } from './trips/trips.module';
 import { ApiTokenInterceptorService } from './api/api-token-interceptor.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -18,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     HttpClientModule,
     SecurityModule,
+    TripsModule,
     BrowserAnimationsModule,
   ],
   providers: [{

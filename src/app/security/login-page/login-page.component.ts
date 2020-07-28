@@ -7,7 +7,7 @@ import { NgForm } from "@angular/forms";
 @Component({
   selector: "app-login-page",
   templateUrl: "./login-page.component.html",
-  styleUrls: ["./login-page.component.css"], //instead of scss????
+  styleUrls: ["./login-page.component.css"], 
 })
 export class LoginPageComponent {
   /**
@@ -43,7 +43,7 @@ export class LoginPageComponent {
         error: (err) => {
           this.loginError = true;
           console.warn(`Authentication failed: ${err.message}`);
-          alert(`\nLogin failed.\nThe username or the password is not valid!`)
+          alert(`\nLogin failed.\nThe username or the password is not valid!`);
         },
       });
     }

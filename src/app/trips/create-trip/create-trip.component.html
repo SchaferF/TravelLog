@@ -1,0 +1,38 @@
+<div>
+    <form #tripForm="ngForm" (submit)="onSubmit(tripForm)">
+        <div>
+            <label for="title">Title</label>
+            <input
+                type="text"
+                name="title"
+                id="title"
+                #titleField="ngModel"
+                required
+                [(ngModel)]="addTripRequest.title"
+            />
+            <p *ngIf="titleField.hasError('required') && titleField.touched">
+                Title is required
+            </p>
+        </div>
+        <div>
+            <label for="descritpion">Descritption</label>
+            <input
+                type="text"
+                name="description"
+                id="description"
+                #descriptionField="ngModel" 
+                required
+                [(ngModel)]="addTripRequest.description"
+            />
+            <p *ngIf="descriptionField.hasError('required') && descriptionField.touched">
+                Description is required
+            </p>
+        </div>
+        <div>
+            <button type="submit" [disabled]="tripForm.invalid">Add trip</button>
+            <p *ngIf="addTripError">
+                Unable to add the trip. See the log for more information.
+            </p>
+        </div>        
+    </form>
+</div>
