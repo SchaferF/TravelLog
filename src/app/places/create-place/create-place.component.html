@@ -1,0 +1,43 @@
+<div>
+    <form #placeForm="ngForm" (submit)="onSumbmit(placeForm)">
+        <div>
+            <label for="name">Name</label>
+            <input type="text"
+                name="name"
+                id="name"
+                #nameField="ngModel"
+                minlength="3"
+                maxlength="100"
+                required
+                [(ngModel)]="addPlaceRequest.name"
+            />
+            <p *ngIf="nameField.hasError('required') && nameField.touched">
+                Name is required
+            </p>
+        </div>
+        <div>
+            <label for="description">Description</label>
+            <input type="text"
+                name="description"
+                id="description"
+                #descriptionField="ngModel"
+                minlength="5"
+                maxlength="5000"
+                required
+                [(ngModel)]="addPlaceRequest.description"
+            />
+            <p *ngIf="descriptionField.hasError('required') && nameField.touched">
+               Description is required 
+            </p>
+        </div>
+        <div>
+            <label for="location">Location</label>
+            <input type="text"
+                name="location"
+                id="location"
+
+            />
+            <div class="map" leaflet [leafletOptions]="mapOptions" (leafletMapReady)="onMapReady($event)"></div>
+        </div>
+    </form>
+</div>

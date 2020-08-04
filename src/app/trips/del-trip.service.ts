@@ -1,29 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from "rxjs";
-import { RegResponse } from "../models/reg-response";
 import { HttpClient } from "@angular/common/http";
 import { tap, map } from "rxjs/operators";
-import { User } from "../models/user";
-import { DelAuthRequest } from "../models/del-auth-request";
 import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
-export class DelService {
+export class DelTripService {
 
   constructor(private http: HttpClient) { 
 
   }
 
-  /**
-   * Delete an account
-   */
-  delete(delRequest: DelAuthRequest): void {
-    this.http.delete(`${environment.apiUrl}/users/${delRequest.id}`).pipe(
+  delete(id: string): Observable<object> {
+    return this.http.delete<object>(`${environment.apiUrl}/trips/${id}`).pipe(
       map((response) => {
-        console.log(`User ${response} delete`);
+        console.log(`Delete ${response}`);
+        return response;
       })
     );
   }
+
 }

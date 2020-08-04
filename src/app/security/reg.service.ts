@@ -25,7 +25,6 @@ export class RegService {
         console.log(`User ${response.name} register in`);
         return response;
       })
-
     );
   }
 }

@@ -6,8 +6,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { DummyPageComponent } from './dummy-page/dummy-page.component';
 import { SecurityModule } from './security/security.module';
 import { TripsModule } from './trips/trips.module';
+import { PlacesModule } from './places/places.module';
 import { ApiTokenInterceptorService } from './api/api-token-interceptor.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     SecurityModule,
     TripsModule,
+    PlacesModule,
     BrowserAnimationsModule,
+    LeafletModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

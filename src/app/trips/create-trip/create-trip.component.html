@@ -7,6 +7,8 @@
                 name="title"
                 id="title"
                 #titleField="ngModel"
+                minlength="3"
+                maxlength="100"
                 required
                 [(ngModel)]="addTripRequest.title"
             />
@@ -21,6 +23,8 @@
                 name="description"
                 id="description"
                 #descriptionField="ngModel" 
+                minlength="5"
+                maxlength="5000"
                 required
                 [(ngModel)]="addTripRequest.description"
             />
