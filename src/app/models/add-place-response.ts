@@ -1,12 +1,14 @@
+import { Point } from 'geojson';
+
 export class AddPlaceResponse {
-    id: String;
-    href: String;
-    name: String;
-    description: String;
-    //location: GeoJsonPoint;
-    tripId: String;
-    tripHref: String;
-    pictureUrl: String;
-    createdAt: String;
-    updatedAt: String;
+    id: string;
+    href: string;
+    name: string;
+    description: string;
+    location: Point;
+    tripId: string;
+    tripHref: string;
+    pictureUrl: string;
+    createdAt: string;
+    updatedAt: string;
 }

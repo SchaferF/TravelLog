@@ -1,11 +1,11 @@
 export class SearchTripRequest {
-    user: String;
-    title: String;
-    search: String;
-    sort: String;
-    href: String;
-    id: String;
+    user: string;
+    title: string;
+    search: string;
+    sort: string;
+    href: string;
+    id: string;
     page: Number;
     pageSize: Number;
-    include: String;
+    include: string;
 }

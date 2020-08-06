@@ -1,8 +1,10 @@
+import { Point } from 'geojson';
+
 export class AddPlaceRequest {
-    name: String;
-    description: String;
-    //location: GeoJsonPoint;
-    tripHref: String;
-    tripId: String;
-    pictureUrl: String;
+    name: string;
+    description: string;
+    location: Point;
+    tripHref: string;
+    tripId: string;
+    pictureUrl: string;
 }

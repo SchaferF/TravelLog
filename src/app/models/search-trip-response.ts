@@ -1,11 +1,11 @@
 export class SearchTripResponse {
-    id: String;
-    href: String;
-    title: String;
-    description: String;
+    id: string;
+    href: string;
+    title: string;
+    description: string;
     placesCount: Number;
-    userId: String;
-    userHref: String;
+    userId: string;
+    userHref: string;
     createdAt: Date;
     updatedAt: Date;
 }

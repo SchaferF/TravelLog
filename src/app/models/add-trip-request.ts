@@ -1,4 +1,4 @@
 export class AddTripRequest {
-    title : String;
-    description : String;
+    title : string;
+    description : string;
 }

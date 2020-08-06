@@ -1,7 +1,7 @@
 export class SearchResponseHeader {
-    Link: String;
-    PaginationPage: String;
-    PaginationPageSize: String;
-    PaginationTotal: String;
-    PaginationFilteredTotal: String;
+    Link: string;
+    PaginationPage: string;
+    PaginationPageSize: string;
+    PaginationTotal: string;
+    PaginationFilteredTotal: string;
 }
