@@ -35,9 +35,47 @@
             <input type="text"
                 name="location"
                 id="location"
-
+                #locationField="ngModel"
+                required
+                [(ngModel)]="addPlaceRequest.location"
             />
             <div class="map" leaflet [leafletOptions]="mapOptions" (leafletMapReady)="onMapReady($event)"></div>
+            <p *ngIf="locationField.hasError('required') && locationField.touched">
+                Location is required
+            </p>
+        </div>
+        <div>
+            <label for="typeHref">Type Href</label>
+            <input type="text"
+                name="typeHref"
+                id="typeHref"
+                #typeHrefField="ngModel"
+                [(ngModel)]="addPlaceRequest.tripHref"
+            />
+        </div>
+        <div>
+            <label for="typeId">Type ID</label>
+            <input type="text"
+                name="typeId"
+                id="typeId"
+                #typeIdField="ngModel"
+                [(ngModel)]="addPlaceRequest.tripId"
+            />
+        </div>
+        <div>
+            <label for="pictureUrl">Picture</label>
+            <input type="text"
+                name="pictureUrl"
+                id="pictureUrl"
+                #pictureUrlField="ngModel"
+                [(ngModel)]="addPlaceRequest.pictureUrl"
+            />
+        </div>
+        <div>
+            <button type="submit" [disabled]="placeForm.invalid">Add Place</button>
+            <p *ngIf="addPlaceError">
+                Unable to add place. See the log for more information.
+            </p>
         </div>
     </form>
 </div>

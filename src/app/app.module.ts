@@ -10,11 +10,13 @@ import { PlacesModule } from './places/places.module';
 import { ApiTokenInterceptorService } from './api/api-token-interceptor.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { MessagesComponent } from './shared/messages/messages.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DummyPageComponent
+    DummyPageComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,

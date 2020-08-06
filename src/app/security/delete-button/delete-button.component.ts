@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { DelAuthRequest } from 'src/app/models/del-auth-request';
 import { DelService } from '../del.service';
 import { AuthService } from "../auth.service";
-import { Router } from "@angular/router";
-import { NgForm } from "@angular/forms";
-import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-delete-button',
@@ -23,7 +20,7 @@ export class DeleteButtonComponent {
    */
   deleteError: boolean;
 
-  constructor(private del: DelService, private router: Router, private auth: AuthService) {
+  constructor(private del: DelService, private auth: AuthService) {
     this.deleteRequest = new DelAuthRequest();
     this.deleteError = false;
    }

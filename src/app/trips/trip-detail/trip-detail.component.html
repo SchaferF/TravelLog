@@ -1,0 +1,16 @@
+<div *ngIf="trip">
+    <h2>{{trip.title | uppercase}} Details</h2>
+    <div><span>id: </span> {{trip.id}}</div>
+    <label>
+        <input [(ngModel)]="trip.title" placeholder="title"/>
+    </label>
+    <label>
+        <input [(ngModel)]="trip.description" placeholder="description"/>
+    </label>
+    <div><span>href: </span> {{trip.href}}</div>
+    <div><span>Place coount: </span> {{trip.placesCount}}</div>
+    <div><span>Created at: </span> {{trip.createdAt | date}}</div>
+    <div><span>Updated at: </span> {{trip.updatedAt | date}}</div>
+    <div><span>User id:</span> {{trip.userId}}</div>
+    <div><span>User href:</span> {{trip.userHref}}</div>
+</div>
