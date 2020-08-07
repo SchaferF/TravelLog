@@ -9,6 +9,8 @@ import { PlacesComponent } from './places/places/places.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TripDetailComponent } from './trips/trip-detail/trip-detail.component';
 import { CreateTripComponent } from './trips/create-trip/create-trip.component';
+import { PlaceDetailComponent } from './places/place-detail/place-detail.component';
+import { CreatePlaceComponent } from './places/create-place/create-place.component';
 
 
 const routes: Routes = [
@@ -16,11 +18,13 @@ const routes: Routes = [
   { path: "", redirectTo: "dummy", pathMatch: "full" },
   { path: "login", component: LoginPageComponent },
   { path: "registration", component: RegisterPageComponent },
-  { path: "trips", component: TripsComponent},
-  { path: "places", component: PlacesComponent},
+  { path: "trips", component: TripsComponent, canActivate: [AuthGuard]},
+  { path: "places", component: PlacesComponent, canActivate: [AuthGuard]},
   { path: "dashboard", component: DashboardComponent, canActivate: [AuthGuard]},
-  { path: 'trips/detail/:id', component: TripDetailComponent},
-  { path: 'trips/create', component: CreateTripComponent},
+  { path: 'trips/detail/:id', component: TripDetailComponent, canActivate: [AuthGuard]},
+  { path: 'trips/create', component: CreateTripComponent, canActivate: [AuthGuard]},
+  { path: 'places/detail/:id', component: PlacesComponent, canActivate: [AuthGuard]},
+  { path: 'places/create', component: CreatePlaceComponent, canActivate: [AuthGuard]},
   // Add the route to display the dummy page
   {
     path: "dummy",

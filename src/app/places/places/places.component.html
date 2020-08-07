@@ -1,1 +1,12 @@
-<p>places works!</p>
+<h2>Places</h2>
+<nav>
+    <a routerLink="/places/create">Add Place</a>
+</nav>
+<ul class="places">
+    <li *ngFor="let place of places">
+        <a routerLink="/places/detail/{{place.id}}">
+            <span class="badge"> {{place.id}} </span> {{place.name}}
+        </a>
+        <button class="delete" title="delete place" (click)="delete(place)">x</button>
+    </li>
+</ul>

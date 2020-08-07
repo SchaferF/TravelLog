@@ -5,13 +5,14 @@ import { Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
 import { latLng, Map, MapOptions, tileLayer} from 'leaflet';
 import { GeolocationService } from '../../shared/services/geolocation.service'
+import { Position } from 'geojson';
 
 @Component({
   selector: 'app-create-place',
   templateUrl: './create-place.component.html',
   styleUrls: ['./create-place.component.css']
 })
-export class CreatePlaceComponent {
+export class CreatePlaceComponent implements OnInit{
 
   mapOptions: MapOptions;
 
@@ -27,23 +28,26 @@ export class CreatePlaceComponent {
     this.addPlaceRequest = new AddPlaceRequest();
     this.addPlaceError = false;
     this.geo.getCurrentPosition()
-      .then((position) => {
-        this.currentPosition = position.coords
-        this.mapOptions = {
-          layers: [
-            tileLayer(
-              'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-              { maxZoom: 18 }
-            )
-          ],
-          zoom: 13,
-          //center: latLng(46.778186, 6.641524)
-          center: latLng(position.coords.latitude, position.coords.longitude)
-        };
-      })
-      .catch((err) => {
-        console.warn('Failed to locate user because', err);
-      });
+    .then((position) => {
+      this.currentPosition = position.coords
+    })
+    .catch((err) => {
+      console.warn('Failed to locate user because', err);
+    });
+    this.mapOptions = {
+      layers: [
+        tileLayer(
+          'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          { maxZoom: 18 }
+        )
+      ],
+      zoom: 13,
+      center: latLng(46.778186, 6.641524)
+    };
+  }
+
+  ngOnInit() {
+    this.getGeo();
   }
 
   onSumbmit(form: NgForm){
@@ -68,8 +72,29 @@ export class CreatePlaceComponent {
     this.map.on('moveend', () => {
       const center = this.map.getCenter();
       console.log(`Map moved to ${center.lng}, ${center.lat}`);
-      //this.addPlaceRequest
     })
+  }
+
+  getGeo(): void {
+    this.geo.watchPosition().subscribe({
+      next: (position) => {
+        this.currentPosition = position.coords;
+        console.log(`New user location!`, position);
+        this.mapOptions = {
+          layers: [
+            tileLayer(
+              'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+              { maxZoom: 18 }
+            )
+          ],
+          zoom: 13,
+          center: latLng(position.coords.latitude, position.coords.longitude)
+        };
+      },
+      error: (error) => {
+        console.log('Failed to locate user because', error);
+      },      
+    });
   }
 
 }

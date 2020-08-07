@@ -14,7 +14,6 @@ import { environment } from "../../environments/environment";
 })
 export class TripService {
 
-  const 
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
   /**
@@ -35,7 +34,6 @@ export class TripService {
    * @param addTrip
    */
   addTrip(trip: AddTripRequest): Observable<AddTripResponse>{
-    this.messageService.add(`TripService: Added ${trip.title}`);
     return this.http.post<AddTripResponse>(`${environment.apiUrl}/trips`, trip).pipe(
       tap(_ => this.log(`added trip ${trip.title}`)),
       map((response) => {
