@@ -39,7 +39,10 @@
                 required
                 [(ngModel)]="addPlaceRequest.location"
             />
-            <div class="map" leaflet [leafletOptions]="mapOptions" (leafletMapReady)="onMapReady($event)"></div>
+            <div class="map" 
+                leaflet [leafletOptions]="mapOptions" 
+                (leafletMapReady)="onMapReady($event)" 
+                [leafletLayersControl]="layersControl"></div>
             <p *ngIf="locationField.hasError('required') && locationField.touched">
                 Location is required
             </p>

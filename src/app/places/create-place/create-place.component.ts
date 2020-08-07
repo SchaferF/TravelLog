@@ -24,6 +24,24 @@ export class CreatePlaceComponent implements OnInit{
 
   map: Map;
 
+  streetMaps = tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    detectRetina: true,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  });
+  wMaps = tileLayer('http://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
+    detectRetina: true,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  });
+
+  // Layers control object with our two base layers and the three overlay layers
+  layersControl = {
+    baseLayers: {
+      'Street Maps': this.streetMaps,
+      'Wikimedia Maps': this.wMaps
+    }
+  };
+
+
   constructor(private place: AddPlaceService, private router: Router, private geo: GeolocationService) { 
     this.addPlaceRequest = new AddPlaceRequest();
     this.addPlaceError = false;
@@ -81,12 +99,7 @@ export class CreatePlaceComponent implements OnInit{
         this.currentPosition = position.coords;
         console.log(`New user location!`, position);
         this.mapOptions = {
-          layers: [
-            tileLayer(
-              'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-              { maxZoom: 18 }
-            )
-          ],
+          layers: [ this.streetMaps ],
           zoom: 13,
           center: latLng(position.coords.latitude, position.coords.longitude)
         };
