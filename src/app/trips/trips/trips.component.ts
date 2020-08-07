@@ -22,4 +22,10 @@ export class TripsComponent implements OnInit {
     this.tripService.getTrips()
       .subscribe(trips => this.trips = trips);
   }
+
+  delete(trip: SearchTripResponse): void {
+    this.trips = this.trips.filter(x => x !== trip);
+    this.tripService.deleteTrip(trip.id).subscribe();
+  }
+
 }

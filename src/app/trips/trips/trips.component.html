@@ -1,6 +1,9 @@
 <h2>My Trips</h2>
 <ul class="trips">
     <li *ngFor="let trip of trips">
-        <span class="badge"> {{trip.id}} </span> {{trip.title}}
+        <a routerLink="/trips/detail/{{trip.id}}">
+            <span class="badge"> {{trip.id}} </span> {{trip.title}}
+        </a>
+        <button class="delete" title="delete trip" (click)="delete(trip)">x</button>
     </li>
 </ul>

@@ -4,6 +4,10 @@ import { LoginPageComponent } from './security/login-page/login-page.component';
 import { DummyPageComponent } from './dummy-page/dummy-page.component';
 import { AuthGuard } from './security/guards/auth.guard';
 import { RegisterPageComponent } from './security/register-page/register-page.component';
+import { TripsComponent } from './trips/trips/trips.component';
+import { PlacesComponent } from './places/places/places.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { TripDetailComponent } from './trips/trip-detail/trip-detail.component';
 
 
 const routes: Routes = [
@@ -11,6 +15,11 @@ const routes: Routes = [
   { path: "", redirectTo: "dummy", pathMatch: "full" },
   { path: "login", component: LoginPageComponent },
   { path: "registration", component: RegisterPageComponent },
+  { path: "trips", component: TripsComponent},
+  { path: "places", component: PlacesComponent},
+  { path: "dashboard", component: DashboardComponent, canActivate: [AuthGuard]},
+  { path: 'trips/detail/:id', component: TripDetailComponent},
+  
   // Add the route to display the dummy page
   {
     path: "dummy",

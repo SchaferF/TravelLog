@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AddTripRequest } from "../../models/add-trip-request";
-import { AddTripService } from "../add-trip.service";
+import { TripService } from "../trip.service";
 import { Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
 
@@ -15,7 +15,7 @@ export class CreateTripComponent {
 
   addTripError: Boolean;
 
-  constructor(private trip: AddTripService, private router: Router) { 
+  constructor(private tripService: TripService, private router: Router) { 
     this.addTripRequest = new AddTripRequest();
     this.addTripError = false;
   }
@@ -26,7 +26,7 @@ export class CreateTripComponent {
       this.addTripError = false;
 
       //Perform the add trip 
-      this.trip.addTrip(this.addTripRequest).subscribe({
+      this.tripService.addTrip(this.addTripRequest).subscribe({
         next: () => this.router.navigateByUrl("/"),
         error: (err) => {
           this.addTripError = true;

@@ -1,4 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location} from '@angular/common';
+import { TripService } from '../trip.service';
 import { SearchTripResponse } from '../../models/search-trip-response';
 
 @Component({
@@ -7,12 +10,27 @@ import { SearchTripResponse } from '../../models/search-trip-response';
   styleUrls: ['./trip-detail.component.css']
 })
 export class TripDetailComponent implements OnInit {
-s
-  @Input() trip: SearchTripResponse;
 
-  constructor() { }
+  trip: SearchTripResponse;
+
+  constructor(private route: ActivatedRoute, private tripService: TripService, private location: Location) { }
 
   ngOnInit(): void {
+    this.getTrip();
   }
 
+  getTrip(): void{
+    const id = this.route.snapshot.paramMap.get('id');
+    this.tripService.getTrip(id)
+      .subscribe(trip => this.trip = trip);
+  }
+
+  goBack(): void{
+    this.location.back();
+  }
+
+  save(): void{
+    this.tripService.updateTrip(this.trip.id, this.trip.title, this.trip.description)
+      .subscribe(() => this.goBack());
+  }
 }
