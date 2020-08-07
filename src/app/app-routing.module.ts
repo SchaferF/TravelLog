@@ -8,6 +8,7 @@ import { TripsComponent } from './trips/trips/trips.component';
 import { PlacesComponent } from './places/places/places.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TripDetailComponent } from './trips/trip-detail/trip-detail.component';
+import { CreateTripComponent } from './trips/create-trip/create-trip.component';
 
 
 const routes: Routes = [
@@ -19,7 +20,7 @@ const routes: Routes = [
   { path: "places", component: PlacesComponent},
   { path: "dashboard", component: DashboardComponent, canActivate: [AuthGuard]},
   { path: 'trips/detail/:id', component: TripDetailComponent},
-  
+  { path: 'trips/create', component: CreateTripComponent},
   // Add the route to display the dummy page
   {
     path: "dummy",

@@ -27,7 +27,7 @@ export class CreateTripComponent {
 
       //Perform the add trip 
       this.tripService.addTrip(this.addTripRequest).subscribe({
-        next: () => this.router.navigateByUrl("/"),
+        next: () => this.router.navigateByUrl("/trips"),
         error: (err) => {
           this.addTripError = true;
           console.log(`Create trip failed: ${err.message}`);
