@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AddPlaceRequest } from '../../models/add-place-request';
-import { AddPlaceService } from '../add-place.service';
+import { PlaceService } from '../place.service';
 import { Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
 import { latLng, Map, MapOptions, tileLayer} from 'leaflet';
@@ -42,7 +42,7 @@ export class CreatePlaceComponent implements OnInit{
   };
 
 
-  constructor(private place: AddPlaceService, private router: Router, private geo: GeolocationService) { 
+  constructor(private placeService: PlaceService, private router: Router, private geo: GeolocationService) { 
     this.addPlaceRequest = new AddPlaceRequest();
     this.addPlaceError = false;
     this.geo.getCurrentPosition()
@@ -74,7 +74,7 @@ export class CreatePlaceComponent implements OnInit{
       this.addPlaceError = false;
 
       //perfomr the add place
-      this.place.addPlace(this.addPlaceRequest).subscribe({
+      this.placeService.addPlace(this.addPlaceRequest).subscribe({
         next: () => this.router.navigateByUrl("/"),
         error: (err) => {
           this.addPlaceError = true;

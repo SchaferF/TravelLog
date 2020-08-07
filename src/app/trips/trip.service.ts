@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { from, Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { HttpClient } from "@angular/common/http";
 import { tap, map } from "rxjs/operators";
 
@@ -8,6 +8,7 @@ import { AddTripRequest } from '../models/add-trip-request';
 import { AddTripResponse } from '../models/add-trip-response';
 import { MessageService } from '../shared/services/message.service';
 import { environment } from "../../environments/environment";
+import { trimTrailingNulls } from '@angular/compiler/src/render3/view/util';
 
 @Injectable({
   providedIn: 'root'
@@ -69,6 +70,17 @@ export class TripService {
       map((response) => {
         return response;
       })
+    );
+  }
+
+  searchTrips(term: string): Observable<SearchTripResponse[]> {
+    if(!term.trim()){
+      return of([]);
+    }
+    return this.http.get<SearchTripResponse[]>(`${environment.apiUrl}/trips/?title=${term}`).pipe(
+      tap(x => x.length ? 
+        this.log(`found trips matching "${term}"`) : 
+        this.log(`no trip matching "${term}"`))
     );
   }
 

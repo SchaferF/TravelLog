@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { from, Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { HttpClient } from "@angular/common/http";
 import { tap, map } from "rxjs/operators";
 import { Point } from 'geojson';
@@ -27,7 +27,7 @@ export class PlaceService {
     );
   }
 
-  addPlaces(place: AddPlaceRequest): Observable<AddPlaceResponse> {
+  addPlace(place: AddPlaceRequest): Observable<AddPlaceResponse> {
     return this.http.post<AddPlaceResponse>(`${environment.apiUrl}/places`, place).pipe(
       tap(_ => this.log(`Added place ${place.name}`)),
       map((response) => {
@@ -63,6 +63,17 @@ export class PlaceService {
       map((response) => {
         return response;
       })
+    );
+  }
+
+  searchPlaces(term: string): Observable<SearchPlaceResponse[]> {
+    if(!term.trim()){
+      return of([]);
+    }
+    return this.http.get<SearchPlaceResponse[]>(`${environment.apiUrl}/places/?name=${term}`).pipe(
+      tap(x => x.length ? 
+        this.log(`found places matching "${term}"`) : 
+        this.log(`no place matching "${term}"`))
     );
   }
 
