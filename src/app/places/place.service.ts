@@ -38,7 +38,7 @@ export class PlaceService {
   }
 
   getPlace(id: string): Observable<SearchPlaceResponse> {
-    return this.http.get<SearchPlaceResponse>(`${environment.apiUrl}/palces/${id}`).pipe(
+    return this.http.get<SearchPlaceResponse>(`${environment.apiUrl}/places/${id}`).pipe(
       tap(_ => this.log(`fetched place id=${id}`)),
       map((response) => {
           console.log(`Get place ${response.name} details`);

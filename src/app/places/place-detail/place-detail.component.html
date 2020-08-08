@@ -13,7 +13,7 @@
     <div><span>Trip Id: </span> {{place.tripId}}</div>
     <div><span>Trip Href: </span> {{place.tripHref}}</div>
     <div><span>Created At: </span> {{place.createdAt | date}}</div>
-    <div><span>Updated At: </span> {{place.updatedAt}}</div>
+    <div><span>Updated At: </span> {{place.updatedAt | date}}</div>
 </div>
 <button (click)="goBack()">go back</button>
 <button (click)="save()">save</button>

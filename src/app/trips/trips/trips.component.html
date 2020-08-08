@@ -4,7 +4,7 @@
 </nav>
 <ul class="trips">
     <li *ngFor="let trip of trips">
-        <a routerLink="/trips/detail/{{trip.id}}">
+        <a routerLink="/trips/details/{{trip.id}}">
             <span class="badge"> {{trip.id}} </span> {{trip.title}}
         </a>
         <button class="delete" title="delete trip" (click)="delete(trip)">x</button>

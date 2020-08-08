@@ -21,9 +21,9 @@ const routes: Routes = [
   { path: "trips", component: TripsComponent, canActivate: [AuthGuard]},
   { path: "places", component: PlacesComponent, canActivate: [AuthGuard]},
   { path: "dashboard", component: DashboardComponent, canActivate: [AuthGuard]},
-  { path: 'trips/detail/:id', component: TripDetailComponent, canActivate: [AuthGuard]},
+  { path: 'trips/details/:id', component: TripDetailComponent, canActivate: [AuthGuard]},
   { path: 'trips/create', component: CreateTripComponent, canActivate: [AuthGuard]},
-  { path: 'places/detail/:id', component: PlacesComponent, canActivate: [AuthGuard]},
+  { path: 'places/details/:id', component: PlaceDetailComponent, canActivate: [AuthGuard]},
   { path: 'places/create', component: CreatePlaceComponent, canActivate: [AuthGuard]},
   // Add the route to display the dummy page
   {

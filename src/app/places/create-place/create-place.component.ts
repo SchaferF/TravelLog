@@ -6,6 +6,7 @@ import { NgForm } from "@angular/forms";
 import { latLng, Map, MapOptions, tileLayer} from 'leaflet';
 import { GeolocationService } from '../../shared/services/geolocation.service'
 import { Position } from 'geojson';
+import { networkInterfaces } from 'os';
 
 @Component({
   selector: 'app-create-place',
@@ -65,7 +66,7 @@ export class CreatePlaceComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.getGeo();
+    //this.getGeo();
   }
 
   onSumbmit(form: NgForm){
@@ -90,6 +91,9 @@ export class CreatePlaceComponent implements OnInit{
     this.map.on('moveend', () => {
       const center = this.map.getCenter();
       console.log(`Map moved to ${center.lng}, ${center.lat}`);
+      //this.addPlaceRequest.location.type = "Point";
+      //this.addPlaceRequest.location.coordinates = [center.lng, center.lat];     
+      this.addPlaceRequest.location = {'type':"Point", 'coordinates': [center.lat, center.lng]};
     })
   }
 
@@ -97,12 +101,9 @@ export class CreatePlaceComponent implements OnInit{
     this.geo.watchPosition().subscribe({
       next: (position) => {
         this.currentPosition = position.coords;
+        const center = latLng(position.coords.latitude, position.coords.longitude);
         console.log(`New user location!`, position);
-        this.mapOptions = {
-          layers: [ this.streetMaps ],
-          zoom: 13,
-          center: latLng(position.coords.latitude, position.coords.longitude)
-        };
+        this.map.setView(center, 13);
       },
       error: (error) => {
         console.log('Failed to locate user because', error);

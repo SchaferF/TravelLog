@@ -32,35 +32,35 @@
         </div>
         <div>
             <label for="location">Location</label>
-            <input type="text"
+            <!--<input type="text"
                 name="location"
                 id="location"
                 #locationField="ngModel"
                 required
                 [(ngModel)]="addPlaceRequest.location"
-            />
+            />-->
             <div class="map" 
                 leaflet [leafletOptions]="mapOptions" 
                 (leafletMapReady)="onMapReady($event)" 
                 [leafletLayersControl]="layersControl"></div>
-            <p *ngIf="locationField.hasError('required') && locationField.touched">
+            <!--<p *ngIf="locationField.hasError('required') && locationField.touched">
                 Location is required
-            </p>
+            </p>-->
         </div>
         <div>
-            <label for="typeHref">Type Href</label>
+            <label for="tripHref">Trip Href</label>
             <input type="text"
-                name="typeHref"
-                id="typeHref"
+                name="tripHref"
+                id="tripHref"
                 #typeHrefField="ngModel"
                 [(ngModel)]="addPlaceRequest.tripHref"
             />
         </div>
         <div>
-            <label for="typeId">Type ID</label>
+            <label for="tripId">Trip ID</label>
             <input type="text"
-                name="typeId"
-                id="typeId"
+                name="tripId"
+                id="tripId"
                 #typeIdField="ngModel"
                 [(ngModel)]="addPlaceRequest.tripId"
             />
