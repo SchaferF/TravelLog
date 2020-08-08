@@ -27,6 +27,16 @@ export class PlaceService {
     );
   }
 
+  getPlacesByTripId(id: string): Observable<SearchPlaceResponse[]> {
+    return this.http.get<SearchPlaceResponse[]>(`${environment.apiUrl}/places/?trip=${id}`).pipe(
+      tap(_ => this.log(`fetched places for trip id=${id}`)),
+      map((response) => {
+        console.log(`Places ${response}`);
+        return response;
+      })
+    )
+  }
+
   addPlace(place: AddPlaceRequest): Observable<AddPlaceResponse> {
     return this.http.post<AddPlaceResponse>(`${environment.apiUrl}/places`, place).pipe(
       tap(_ => this.log(`Added place ${place.name}`)),

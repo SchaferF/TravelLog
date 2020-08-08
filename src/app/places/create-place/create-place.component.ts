@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { AddPlaceRequest } from '../../models/add-place-request';
 import { PlaceService } from '../place.service';
 import { Router } from "@angular/router";
@@ -43,7 +44,10 @@ export class CreatePlaceComponent implements OnInit{
   };
 
 
-  constructor(private placeService: PlaceService, private router: Router, private geo: GeolocationService) { 
+  constructor(private placeService: PlaceService, 
+      private router: Router, 
+      private geo: GeolocationService,
+      private route: ActivatedRoute) { 
     this.addPlaceRequest = new AddPlaceRequest();
     this.addPlaceError = false;
     this.geo.getCurrentPosition()
@@ -67,6 +71,8 @@ export class CreatePlaceComponent implements OnInit{
 
   ngOnInit() {
     //this.getGeo();
+    const id = this.route.snapshot.paramMap.get('id');
+    this.addPlaceRequest.tripId = id;
   }
 
   onSumbmit(form: NgForm){

@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'trips/details/:id', component: TripDetailComponent, canActivate: [AuthGuard]},
   { path: 'trips/create', component: CreateTripComponent, canActivate: [AuthGuard]},
   { path: 'places/details/:id', component: PlaceDetailComponent, canActivate: [AuthGuard]},
-  { path: 'places/create', component: CreatePlaceComponent, canActivate: [AuthGuard]},
+  { path: 'places/create/:id', component: CreatePlaceComponent, canActivate: [AuthGuard]},
   // Add the route to display the dummy page
   {
     path: "dummy",

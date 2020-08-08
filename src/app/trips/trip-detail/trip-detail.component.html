@@ -17,4 +17,6 @@
 <button (click)="goBack()">go back</button>
 <button (click)="save()">save</button>
 
-<app-places></app-places>
+<div *ngIf="trip">
+    <app-places [tripId]="trip.id"></app-places>
+</div>
