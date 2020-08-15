@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Location} from '@angular/common';
 import { AddPlaceRequest } from '../../models/add-place-request';
 import { PlaceService } from '../place.service';
 import { Router } from "@angular/router";
@@ -42,7 +43,8 @@ export class CreatePlaceComponent implements OnInit{
   constructor(private placeService: PlaceService, 
       private router: Router, 
       private geo: GeolocationService,
-      private route: ActivatedRoute) { 
+      private route: ActivatedRoute, 
+      private location: Location) { 
     this.addPlaceRequest = new AddPlaceRequest();
     this.addPlaceError = false;
     this.mapOptions = {
@@ -71,7 +73,7 @@ export class CreatePlaceComponent implements OnInit{
 
       //perfomr the add place
       this.placeService.addPlace(this.addPlaceRequest).subscribe({
-        next: () => this.router.navigateByUrl("/"),
+        next: () => this.goBack(),
         error: (err) => {
           this.addPlaceError = true;
           console.log(`Create place failed: ${err.message}`);
@@ -107,6 +109,10 @@ export class CreatePlaceComponent implements OnInit{
       .catch((error) => {
         console.error('Failed to locate user because:', error);
       })
+  }
+
+  goBack(): void{
+    this.location.back();
   }
 
   private updateMarkers(latitude: number, longitude: number): void {
