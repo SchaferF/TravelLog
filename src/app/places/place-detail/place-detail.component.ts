@@ -5,7 +5,7 @@ import { PlaceService } from '../place.service';
 import { SearchPlaceResponse } from '../../models/search-place-response';
 import { latLng, Map, MapOptions, marker, Marker, MarkerOptions, tileLayer} from 'leaflet';
 import { defaultIcon } from 'src/app/shared/default-marker';
-import { GeolocationService } from '../../shared/services/geolocation.service'
+import { GeolocationService } from '../../shared/services/geolocation.service';
 
 @Component({
   selector: 'app-place-detail',

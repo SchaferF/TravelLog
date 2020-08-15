@@ -7,9 +7,10 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { PlacesComponent } from './places/places.component';
 import { PlaceDetailComponent } from './place-detail/place-detail.component';
 import { PlaceSearchComponent } from './place-search/place-search.component';
+import { CommentsComponent } from '../shared/comments/comments.component';
 
 @NgModule({
-  declarations: [CreatePlaceComponent, PlacesComponent, PlaceDetailComponent, PlaceSearchComponent],
+  declarations: [CreatePlaceComponent, PlacesComponent, PlaceDetailComponent, PlaceSearchComponent, CommentsComponent],
   imports: [
     CommonModule,
     FormsModule,

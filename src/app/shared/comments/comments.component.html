@@ -1,0 +1,35 @@
+<h2>Comments</h2>
+<div>
+    <form #commentForm="ngForm" (submit)="onSumbmit(commentForm)">
+        <div>
+            <label for="comment">Comment</label>
+            <input type="text"
+                name="comment"
+                id="comment"
+                #commentField="ngModel"
+                minlength="1"
+                maxlength="100"
+                required
+                [(ngModel)]="newComment.comment"
+            />
+            <p *ngIf="commentField.hasError('required') && commentField.touched">
+                Name is required
+            </p>
+        </div>   
+        <div>
+            <button type="submit" [disabled]="commentForm.invalid">Add Comment</button>
+            <p *ngIf="addCommentError">
+                Unable to add place. See the log for more information.
+            </p>
+        </div>        
+    </form>
+</div>
+<div *ngIf="commentService.comments.length">
+    <ul class="comments">
+        <li *ngFor="let comment of commentService.comments">
+            <span class="badge">{{comment.id}} </span>{{comment.comment}}
+            <button class="delete" title="delete comment" (click)="delete(comment)">x</button>
+        </li>
+    </ul>
+    <button class="clear" (click)="commentService.clear()">Clear</button>
+</div>

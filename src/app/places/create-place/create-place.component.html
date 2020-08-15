@@ -26,7 +26,7 @@
                 required
                 [(ngModel)]="addPlaceRequest.description"
             />
-            <p *ngIf="descriptionField.hasError('required') && nameField.touched">
+            <p *ngIf="descriptionField.hasError('required') && descriptionField.touched">
                Description is required 
             </p>
         </div>
