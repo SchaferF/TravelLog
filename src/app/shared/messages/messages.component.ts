@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from '../../shared/services/message.service'
+import { environment } from 'src/environments/environment';
+import { MessageService } from '../../shared/services/message.service';
 
 @Component({
   selector: 'app-messages',
@@ -8,11 +9,14 @@ import { MessageService } from '../../shared/services/message.service'
 })
 export class MessagesComponent implements OnInit {
 
+  disableMessage: boolean;
+
   constructor(public messageService: MessageService) { 
     
   }
 
   ngOnInit(): void {
+    this.disableMessage = environment.production;
   }
 
 }
