@@ -3,7 +3,7 @@ export class SearchTripResponse {
     href: string;
     title: string;
     description: string;
-    placesCount: Number;
+    placesCount: number;
     userId: string;
     userHref: string;
     createdAt: Date;

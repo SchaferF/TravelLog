@@ -42,7 +42,10 @@
             <div class="map" 
                 leaflet [leafletOptions]="mapOptions" 
                 (leafletMapReady)="onMapReady($event)" 
-                [leafletLayersControl]="layersControl"></div>
+                (click)="onMouseEvent($event)"
+                [leafletLayersControl]="layersControl"
+                [leafletLayers]="mapMarkers">
+            </div>
             <!--<p *ngIf="locationField.hasError('required') && locationField.touched">
                 Location is required
             </p>-->

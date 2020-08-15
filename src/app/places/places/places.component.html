@@ -10,3 +10,10 @@
         <button class="delete" title="delete place" (click)="delete(place)">x</button>
     </li>
 </ul>
+<div
+    *ngIf="places"
+    class="map"
+    leaflet
+    [leafletOptions]="mapOptions"
+    [leafletLayers]="mapMarkers">
+</div>

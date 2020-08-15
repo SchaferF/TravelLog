@@ -4,10 +4,9 @@ import { AddPlaceRequest } from '../../models/add-place-request';
 import { PlaceService } from '../place.service';
 import { Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
-import { latLng, Map, MapOptions, tileLayer} from 'leaflet';
+import { LatLng, latLng, Map, MapOptions, marker, Marker, tileLayer} from 'leaflet';
 import { GeolocationService } from '../../shared/services/geolocation.service'
-import { Position } from 'geojson';
-import { networkInterfaces } from 'os';
+import { defaultIcon } from 'src/app/shared/default-marker';
 
 @Component({
   selector: 'app-create-place',
@@ -16,16 +15,13 @@ import { networkInterfaces } from 'os';
 })
 export class CreatePlaceComponent implements OnInit{
 
-  mapOptions: MapOptions;
 
   addPlaceRequest: AddPlaceRequest;
-
   addPlaceError: Boolean;
 
-  currentPosition: Coordinates;
-
+  mapOptions: MapOptions;
+  mapMarkers: Marker[];
   map: Map;
-
   streetMaps = tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     detectRetina: true,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -34,7 +30,6 @@ export class CreatePlaceComponent implements OnInit{
     detectRetina: true,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   });
-
   // Layers control object with our two base layers and the three overlay layers
   layersControl = {
     baseLayers: {
@@ -50,13 +45,6 @@ export class CreatePlaceComponent implements OnInit{
       private route: ActivatedRoute) { 
     this.addPlaceRequest = new AddPlaceRequest();
     this.addPlaceError = false;
-    this.geo.getCurrentPosition()
-    .then((position) => {
-      this.currentPosition = position.coords
-    })
-    .catch((err) => {
-      console.warn('Failed to locate user because', err);
-    });
     this.mapOptions = {
       layers: [
         tileLayer(
@@ -73,6 +61,7 @@ export class CreatePlaceComponent implements OnInit{
     //this.getGeo();
     const id = this.route.snapshot.paramMap.get('id');
     this.addPlaceRequest.tripId = id;
+    this.getGeo();
   }
 
   onSumbmit(form: NgForm){
@@ -96,25 +85,35 @@ export class CreatePlaceComponent implements OnInit{
     this.map = map;
     this.map.on('moveend', () => {
       const center = this.map.getCenter();
-      console.log(`Map moved to ${center.lng}, ${center.lat}`);
-      //this.addPlaceRequest.location.type = "Point";
-      //this.addPlaceRequest.location.coordinates = [center.lng, center.lat];     
-      this.addPlaceRequest.location = {'type':"Point", 'coordinates': [center.lat, center.lng]};
-    })
+      //console.log(`Map moved to ${center.lat}, ${center.lng}`);  
+      //this.addPlaceRequest.location = {'type':"Point", 'coordinates': [center.lat, center.lng]};
+      //this.updateMarkers(center.lat, center.lng);
+    });
+  }
+
+  onMouseEvent(ev: MouseEvent){
+    const center = this.map.mouseEventToLatLng(ev);
+    this.updateMarkers(center.lat, center.lng);
   }
 
   getGeo(): void {
-    this.geo.watchPosition().subscribe({
-      next: (position) => {
-        this.currentPosition = position.coords;
+    this.geo.getCurrentPosition()
+      .then((position) => {
         const center = latLng(position.coords.latitude, position.coords.longitude);
         console.log(`New user location!`, position);
-        this.map.setView(center, 13);
-      },
-      error: (error) => {
-        console.log('Failed to locate user because', error);
-      },      
-    });
+        this.updateMarkers(center.lat, center.lng);
+        this.map.setView(center, 13);        
+      })
+      .catch((error) => {
+        console.error('Failed to locate user because:', error);
+      })
   }
+
+  private updateMarkers(latitude: number, longitude: number): void {
+    console.log('mapMarkers updated :', `coords: ${latitude}, ${longitude}`);
+    this.mapMarkers = [marker(latLng(latitude, longitude), { icon: defaultIcon })
+      .bindTooltip(`Coordinates: Latitude: ${latitude} Longitude:${longitude}`)];     
+    this.addPlaceRequest.location = {'type':"Point", 'coordinates': [latitude, longitude]};
+    }
 
 }

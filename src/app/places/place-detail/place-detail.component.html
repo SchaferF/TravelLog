@@ -8,7 +8,15 @@
         <input [(ngModel)]="place.description" placeholder="description"/>
     </label>
     <div><span>href: </span> {{place.href}}</div>
-    <div><span>location: </span> {{place.location}}</div>
+    <div><span>location: </span>
+        <div class="map" 
+            leaflet [leafletOptions]="mapOptions" 
+            (leafletMapReady)="onMapReady($event)" 
+            (click)="onMouseEvent($event)"
+            [leafletLayersControl]="layersControl"
+            [leafletLayers]="mapMarkers">
+        </div>
+    </div>
     <div><span>Picture URL: </span> {{place.pictureUrl}}</div>
     <div><span>Trip Id: </span> {{place.tripId}}</div>
     <div><span>Trip Href: </span> {{place.tripHref}}</div>
