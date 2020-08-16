@@ -6,28 +6,47 @@ import { MessageService } from '../services/message.service';
   providedIn: 'root'
 })
 export class CommentService {
-  comments: Comment[];
+  comments: Comment[] = [];
   private id: number;
-  constructor(private messageService: MessageService) { }
+  private allComments: Comment[] = [];
+  private placeId: string;
+  constructor(private messageService: MessageService) { 
+    this.initializeId();
+  }
 
   add(comment: string, placeId: string): void {
     this.id++;
     const id = this.id.toString();
     const com:Comment = {id, placeId, comment}; 
+    this.placeId = placeId;
+    this.allComments.push(com);
+    this.refreshComment();
     this.messageService.add(`CommentService comment added: ${com.id}`);
-    this.comments.push(com);
-  }
-
-  filterCommentByPlaceId(placeId: string): void{
-    this.comments.filter(x => x.placeId == placeId);
   }
 
   delete(id: string): void{
-    this.comments = this.comments.filter(x => x.id !== id);
+    this.allComments = this.allComments.filter(x => x.id !== id);
+    this.refreshComment();
+    this.initializeId();
     this.messageService.add(`CommentService comment deleted: ${id}`);
   }
 
   clear(): void{
-    this.comments = [];
+    this.allComments = [];
+    this.refreshComment();
+    this.initializeId();
+  }
+
+  getComments(placeId: string) {
+    this.placeId = placeId;
+    this.refreshComment();
+  }
+
+  private initializeId(): void {
+    this.id = this.comments.length;
+  }
+
+  private refreshComment(){
+    this.comments = this.allComments.filter(x => x.placeId == this.placeId);
   }
 }
