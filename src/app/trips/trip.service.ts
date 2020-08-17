@@ -20,10 +20,13 @@ export class TripService {
   /**
    * GET all trips
    */
-  getTrips(): Observable<SearchTripResponse[]> {
+  getTrips(userId?: string): Observable<SearchTripResponse[]> {
     return this.http.get<SearchTripResponse[]>(`${environment.apiUrl}/trips`).pipe(
       tap(_ => this.log('fetched trips')),
       map((response) => {
+        if(userId) {
+          response = response.filter(x => x.userId == userId);
+        }
         console.log(`Trips ${response}`);
         return response;
       })
@@ -66,7 +69,7 @@ export class TripService {
 
   deleteTrip(id: string): Observable<SearchTripResponse> {
     return this.http.delete<SearchTripResponse>(`${environment.apiUrl}/trips/${id}`).pipe(
-      tap(_ => this.log(`Deleted trip id=${id}`)),
+      tap(_ => this.log(`deleted trip id=${id}`)),
       map((response) => {
         return response;
       })

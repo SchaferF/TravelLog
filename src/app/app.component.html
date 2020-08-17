@@ -556,9 +556,9 @@
 
 <nav>
   <a routerLink="/dummy">Dummy</a>
-  <a routerLink="/dashboard">Dashboard</a>
-  <a routerLink="/registration">Registration</a>
-  <a routerLink="/trips">Trips</a>
+  <a routerLink="/dashboard" *ngIf="user">Dashboard</a>
+  <a routerLink="/trips" *ngIf="user">Trips</a>
+  <a routerLink="/registration" *ngIf="!user">Registration</a>
 </nav>
 
 <router-outlet></router-outlet>

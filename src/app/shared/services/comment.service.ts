@@ -21,14 +21,14 @@ export class CommentService {
     this.placeId = placeId;
     this.allComments.push(com);
     this.refreshComment();
-    this.messageService.add(`CommentService comment added: ${com.id}`);
+    this.log(`added comment id=${com.id}`);
   }
 
   delete(id: string): void{
     this.allComments = this.allComments.filter(x => x.id !== id);
     this.refreshComment();
     this.initializeId();
-    this.messageService.add(`CommentService comment deleted: ${id}`);
+    this.log(`deleted comment id=${id}`);
   }
 
   clear(): void{
@@ -48,5 +48,9 @@ export class CommentService {
 
   private refreshComment(){
     this.comments = this.allComments.filter(x => x.placeId == this.placeId);
+  }
+
+  private log(message: string): void {
+    this.messageService.add(`CommentService: ${message}`);
   }
 }

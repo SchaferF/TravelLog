@@ -17,7 +17,7 @@ const routes: Routes = [
   // Add this default route to redirect to dummy
   { path: "", redirectTo: "dummy", pathMatch: "full" },
   { path: "login", component: LoginPageComponent },
-  { path: "registration", component: RegisterPageComponent },
+  { path: "registration", component: RegisterPageComponent},
   { path: "trips", component: TripsComponent, canActivate: [AuthGuard]},
   { path: "places", component: PlacesComponent, canActivate: [AuthGuard]},
   { path: "dashboard", component: DashboardComponent, canActivate: [AuthGuard]},
