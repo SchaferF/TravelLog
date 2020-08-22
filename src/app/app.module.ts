@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { MessagesComponent } from './shared/messages/messages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ImagesModule } from './images/images.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     PlacesModule,
     BrowserAnimationsModule,
     LeafletModule,
-    FormsModule
+    FormsModule,
+    ImagesModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
