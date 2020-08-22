@@ -6,7 +6,8 @@ import { ImagesComponent } from './images/images.component';
 @NgModule({
   declarations: [ImagesComponent],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+  ],
+  exports: [ ImagesComponent, ]
 })
 export class ImagesModule { }

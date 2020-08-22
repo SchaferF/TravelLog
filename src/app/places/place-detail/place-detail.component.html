@@ -17,7 +17,9 @@
             [leafletLayers]="mapMarkers">
         </div>
     </div>
-    <div><span>Picture URL: </span> {{place.pictureUrl}}</div>
+    <div><span>Picture URL: </span> {{place.pictureUrl}}
+        <img *ngIf="place.pictureUrl" src="{place.pictureUrl}" alt="{place.pictureUrl}">
+    </div>
     <div><span>Trip Id: </span> {{place.tripId}}</div>
     <div><span>Trip Href: </span> {{place.tripHref}}</div>
     <div><span>Created At: </span> {{place.createdAt | date}}</div>

@@ -8,6 +8,7 @@ import { PlacesComponent } from './places/places.component';
 import { PlaceDetailComponent } from './place-detail/place-detail.component';
 import { PlaceSearchComponent } from './place-search/place-search.component';
 import { CommentsComponent } from '../shared/comments/comments.component';
+import { ImagesModule } from '../images/images.module';
 
 @NgModule({
   declarations: [CreatePlaceComponent, PlacesComponent, PlaceDetailComponent, PlaceSearchComponent, CommentsComponent],
@@ -15,7 +16,8 @@ import { CommentsComponent } from '../shared/comments/comments.component';
     CommonModule,
     FormsModule,
     LeafletModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ImagesModule,
   ],
   exports: [ CreatePlaceComponent, PlacesComponent, PlaceDetailComponent, PlaceSearchComponent]
 })

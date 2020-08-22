@@ -1,1 +1,8 @@
-<p>images works!</p>
+<h2><span class="badge"> {{images.length}} </span> Images </h2>
+<ul class="images">
+    <li *ngFor="let image of images">
+        <span class="badge"> {{image.id}} </span> {{image.createdAt}}
+        <img src="{image.url}" alt="{image.url}">
+        <button class="delete" title="delete image" (click)="delete(image)">x</button>
+    </li>
+</ul>
