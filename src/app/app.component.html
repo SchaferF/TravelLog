@@ -541,25 +541,28 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<h1>TODO:</h1>
-<ul>
-    <li><p>Register a new account and log in/out to the app</p></li>
-    <li><p>create a trip with a title and a description</p></li>
-    <li><p>add places to a trip at a specific location, with a title, description and picture</p></li>
-    <li><p>manages their created trips/places (update/delete)</p></li>
-    <li><p>see a list of trips and access the details of a trip, including the list of its places</p></li>
-    <li><p>see places on a map for one or all trips and see the details of those places</p></li>
-    <li><p>filter places and/or trips so as to see only some of them somewhere in the app</p></li>
-    <li><p>search places and/or trips somewhere in the app</p></li>
-    <li><p>post comments on places and see comments for them somewhere in the app</p></li>
-</ul>
+<div style="text-align: center">
+  <h1>{{title}}</h1>
+  <h2>TODO:</h2>
+  <ul>
+      <li><p>Register a new account and log in/out to the app</p></li>
+      <li><p>create a trip with a title and a description</p></li>
+      <li><p>add places to a trip at a specific location, with a title, description and picture</p></li>
+      <li><p>manages their created trips/places (update/delete)</p></li>
+      <li><p>see a list of trips and access the details of a trip, including the list of its places</p></li>
+      <li><p>see places on a map for one or all trips and see the details of those places</p></li>
+      <li><p>filter places and/or trips so as to see only some of them somewhere in the app</p></li>
+      <li><p>search places and/or trips somewhere in the app</p></li>
+      <li><p>post comments on places and see comments for them somewhere in the app</p></li>
+  </ul>
 
-<nav>
-  <a routerLink="/dummy">Dummy</a>
-  <a routerLink="/dashboard" *ngIf="user">Dashboard</a>
-  <a routerLink="/trips" *ngIf="user">Trips</a>
-  <a routerLink="/registration" *ngIf="!user">Registration</a>
-</nav>
+  <nav>
+    <a routerLink="/dummy">Dummy</a>
+    <a routerLink="/dashboard" *ngIf="user">Dashboard</a>
+    <a routerLink="/trips" *ngIf="user">Trips</a>
+    <a routerLink="/registration" *ngIf="!user">Registration</a>
+  </nav>
 
-<router-outlet></router-outlet>
-<app-messages></app-messages>
+  <router-outlet></router-outlet>
+  <app-messages></app-messages>
+</div>

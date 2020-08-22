@@ -1,7 +1,7 @@
-import { DefaultMarker } from './default-marker';
+import { defaultIcon } from './default-marker';
 
-describe('DefaultMarker', () => {
-  it('should create an instance', () => {
-    expect(new DefaultMarker()).toBeTruthy();
+describe('defaultIcon', () => {
+  it('is declared', () => {
+    expect(defaultIcon).toBeTruthy();
   });
 });
