@@ -13,4 +13,8 @@ describe('PlaceService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should fetched places', () => {
+    expect(service.getPlaces()).toBeGreaterThan(0);
+  });
 });
