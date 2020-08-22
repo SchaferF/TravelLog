@@ -1,4 +1,5 @@
 <h2><span class="badge"> {{images.length}} </span> Images </h2>
+<app-get-image></app-get-image>
 <ul class="images">
     <li *ngFor="let image of images">
         <span class="badge"> {{image.id}} </span> {{image.createdAt}}

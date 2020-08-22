@@ -10,9 +10,9 @@ import { MessageService } from '../shared/services/message.service';
 })
 export class ImageService {
 
-  url = 'https://comem-qimg.herokuapp.com/api/images';
-  token = '6DYZ4B0Z5FncI8McE6hqR0Vz4VIWunyQfpVsU9BIU37d8+Qft5tJgN/vAQGR/fAYsg60kCARyYqQRM6JTHJ0faA96ESiJjYcz8DsOjIXEBoFJJSPa0VIOSkEaaK2S71xpu/aD6WLPzSeqCYVA+0ObaaYp/FPVW0ODKyzBh5MHlQ=';
-  headers =  new HttpHeaders().set("Authorization", `Bearer ${this.token}`);
+  private url = 'https://comem-qimg.herokuapp.com/api/images';
+  private token = '6DYZ4B0Z5FncI8McE6hqR0Vz4VIWunyQfpVsU9BIU37d8+Qft5tJgN/vAQGR/fAYsg60kCARyYqQRM6JTHJ0faA96ESiJjYcz8DsOjIXEBoFJJSPa0VIOSkEaaK2S71xpu/aD6WLPzSeqCYVA+0ObaaYp/FPVW0ODKyzBh5MHlQ=';
+  private headers =  new HttpHeaders().set("Authorization", `Bearer ${this.token}`);
 
   constructor(private http: HttpClient, private messageService: MessageService) { }
 
