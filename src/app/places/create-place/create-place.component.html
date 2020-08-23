@@ -76,6 +76,7 @@
                 #pictureUrlField="ngModel"
                 [(ngModel)]="addPlaceRequest.pictureUrl"
             />
+            <app-images (newPictureUrl)="setPictureUrl($event)"></app-images>
         </div>
         <div>
             <button type="submit" [disabled]="placeForm.invalid">Add Place</button>

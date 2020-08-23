@@ -2,8 +2,9 @@
 <app-get-image></app-get-image>
 <ul class="images">
     <li *ngFor="let image of images">
-        <span class="badge"> {{image.id}} </span> {{image.createdAt}}
-        <img src="{image.url}" alt="{image.url}">
+        <span class="badge"> {{image.id}} </span> {{image.createdAt | date}}
+        <img src={{image.url}} alt={{image.url}}>
+        <button class="select" title="select image" (click)="onSelect(image)">Choose</button>
         <button class="delete" title="delete image" (click)="delete(image)">x</button>
     </li>
 </ul>

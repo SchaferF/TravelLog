@@ -103,6 +103,10 @@ export class PlaceDetailComponent implements OnInit {
       })
   }
 
+  setPictureUrl(newPictureUrl: string): void {
+    this.place.pictureUrl = newPictureUrl;
+  }
+
   private updateMarkers(lat: number, lng: number): void{
     console.log('mapMarkers updated :', `coords: ${lat}, ${lng}`);
     this.mapMarkers = [marker(latLng(lat, lng), { icon: defaultIcon })

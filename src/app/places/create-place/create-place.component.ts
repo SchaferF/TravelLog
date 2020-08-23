@@ -121,5 +121,8 @@ export class CreatePlaceComponent implements OnInit{
       .bindTooltip(`Coordinates: Latitude: ${latitude} Longitude:${longitude}`)];     
     this.addPlaceRequest.location = {'type':"Point", 'coordinates': [latitude, longitude]};
     }
-
+    
+    setPictureUrl(newPictureUrl: string): void {
+      this.addPlaceRequest.pictureUrl = newPictureUrl;
+    }
 }

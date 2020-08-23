@@ -17,8 +17,11 @@
             [leafletLayers]="mapMarkers">
         </div>
     </div>
-    <div><span>Picture URL: </span> {{place.pictureUrl}}
-        <img *ngIf="place.pictureUrl" src="{place.pictureUrl}" alt="{place.pictureUrl}">
+    <div *ngIf="!place.pictureUrl">
+        <app-images (newPictureUrl)="setPictureUrl($event)"></app-images>
+    </div>
+    <div class="card"><span>Picture URL: </span> {{place.pictureUrl}}
+        <img *ngIf="place.pictureUrl" src={{place.pictureUrl}} alt={{place.pictureUrl}}>
     </div>
     <div><span>Trip Id: </span> {{place.tripId}}</div>
     <div><span>Trip Href: </span> {{place.tripHref}}</div>

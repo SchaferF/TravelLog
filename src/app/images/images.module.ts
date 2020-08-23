@@ -10,6 +10,6 @@ import { GetImageComponent } from './get-image/get-image.component';
     CommonModule,
     FileUploadModule,
   ],
-  exports: [ ImagesComponent, ]
+  exports: [ ImagesComponent,  GetImageComponent]
 })
 export class ImagesModule { }

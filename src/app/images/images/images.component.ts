@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ImageResponse } from '../../models/image-response';
 import { ImageService } from '../image.service';
 
@@ -8,6 +8,8 @@ import { ImageService } from '../image.service';
   styleUrls: ['./images.component.css']
 })
 export class ImagesComponent implements OnInit {
+
+  @Output() newPictureUrl = new EventEmitter<string>();
 
   images : ImageResponse[];
 
@@ -25,6 +27,11 @@ export class ImagesComponent implements OnInit {
   }
 
   delete(image: ImageResponse): void {
-    this.images.filter(x => x !== image);
+    this.images = this.images.filter(x => x !== image);
+    this.imageService.delete(image.id).subscribe();
+  }
+
+  onSelect(image: ImageResponse): void {
+    this.newPictureUrl.emit(image.url);
   }
 }
