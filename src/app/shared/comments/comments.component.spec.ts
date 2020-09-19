@@ -22,4 +22,11 @@ describe('CommentsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
+it('should correctly render the passed @Input value', () => {
+  component.placeId = '12345'; // 1
+  expect(component.placeId).toBeTruthy();
+});
+
 });

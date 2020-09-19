@@ -22,4 +22,9 @@ describe('PlacesComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should correctly render the passed @Input value', () => {
+    component.tripId = '12345'; // 1
+    expect(component.tripId).toBeTruthy();
+  });
 });
