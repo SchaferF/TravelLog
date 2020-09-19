@@ -6,6 +6,7 @@ import { SearchPlaceResponse } from '../../models/search-place-response';
 import { latLng, Map, MapOptions, marker, Marker, MarkerOptions, tileLayer} from 'leaflet';
 import { defaultIcon } from 'src/app/shared/default-marker';
 import { GeolocationService } from '../../shared/services/geolocation.service';
+import { environment } from "../../../environments/environment";
 
 @Component({
   selector: 'app-place-detail',
@@ -35,6 +36,8 @@ export class PlaceDetailComponent implements OnInit {
 
   place: SearchPlaceResponse;
 
+  production: boolean;
+
   constructor(private route: ActivatedRoute, 
     private placeService: PlaceService, 
     private location: Location,
@@ -48,7 +51,8 @@ export class PlaceDetailComponent implements OnInit {
         ],
         zoom: 13,
         center: latLng(46.778186, 6.641524)
-      };      
+      };     
+      this.production = environment.production; 
     }
 
   ngOnInit(): void {

@@ -7,7 +7,7 @@
     <label>
         <input [(ngModel)]="place.description" placeholder="description"/>
     </label>
-    <div><span>href: </span> {{place.href}}</div>
+    <div *ngIf="!production"><span>href: </span> {{place.href}}</div>
     <div><span>location: </span>
         <div class="map" 
             leaflet [leafletOptions]="mapOptions" 
@@ -23,13 +23,13 @@
     <div *ngIf="place.pictureUrl" class="card"><span>Picture : </span>
         <img src={{place.pictureUrl}} alt={{place.pictureUrl}}>
     </div>
-    <div><span>Trip Id: </span> {{place.tripId}}</div>
-    <div><span>Trip Href: </span> {{place.tripHref}}</div>
+    <div *ngIf="!production"><span>Trip Id: </span> {{place.tripId}}</div>
+    <div *ngIf="!production"><span>Trip Href: </span> {{place.tripHref}}</div>
     <div><span>Created At: </span> {{place.createdAt | date}}</div>
     <div><span>Updated At: </span> {{place.updatedAt | date}}</div>
 </div>
-<button (click)="goBack()">go back</button>
-<button (click)="save()">save</button>
+<button mat-button (click)="goBack()">go back</button>
+<button mat-button (click)="save()">save</button>
 <div>
     <app-comments [placeId]="place.id"></app-comments>
 </div>

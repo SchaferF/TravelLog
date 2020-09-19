@@ -5,7 +5,7 @@ import { AuthService } from "../auth.service";
 
 @Component({
   selector: 'app-delete-button',
-  template: '<button (click)="delete()">Delete</button>',
+  template: '<button mat-button (click)="delete()">Delete</button>',
 })
 export class DeleteButtonComponent {
 

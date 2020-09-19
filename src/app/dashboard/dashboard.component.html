@@ -1,6 +1,6 @@
 <h3>Top trips</h3>
 <div class="grid grid-pad">
-    <a *ngFor="let trip of trips" class="col-1-4" routerLink="/trips/details/{{trip.id}}">
+    <a mat-button *ngFor="let trip of trips" class="col-1-4" routerLink="/trips/details/{{trip.id}}">
         <div class="module trip">
             <h4>{{trip.title}}</h4>
         </div>

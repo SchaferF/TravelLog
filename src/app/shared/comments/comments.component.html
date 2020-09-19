@@ -17,7 +17,7 @@
             </p>
         </div>   
         <div>
-            <button type="submit" [disabled]="commentForm.invalid">Add Comment</button>
+            <button mat-button type="submit" [disabled]="commentForm.invalid">Add Comment</button>
             <p *ngIf="addCommentError">
                 Unable to add place. See the log for more information.
             </p>
@@ -28,7 +28,7 @@
     <ul class="comments">
         <li *ngFor="let comment of commentService.comments">
             <span class="badge">{{comment.id}} </span>{{comment.comment}}
-            <button class="delete" title="delete comment" (click)="delete(comment.id)">x</button>
+            <button mat-button class="delete" title="delete comment" (click)="delete(comment.id)">x</button>
         </li>
     </ul>
     <!--<button class="clear" (click)="commentService.clear()">Clear</button>-->

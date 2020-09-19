@@ -4,7 +4,7 @@ import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-logout-button',
-  template: '<button (click)="logout()">Logout</button>',
+  template: '<button mat-button (click)="logout()">Logout</button>',
 })
 export class LogoutButtonComponent {
 

@@ -1,10 +1,44 @@
 <h2><span class="badge"> {{images.length}} </span> Images </h2>
 <app-get-image></app-get-image>
+<!--
 <ul class="images">
     <li *ngFor="let image of images">
         <span class="badge"> {{image.id}} </span> {{image.createdAt | date}}
         <img src={{image.url}} alt={{image.url}}>
-        <button class="select" title="select image" (click)="onSelect(image)">Choose</button>
-        <button class="delete" title="delete image" (click)="delete(image)">x</button>
+        <button mat-button class="select" title="select image" (click)="onSelect(image)">Choose</button>
+        <button mat-button class="delete" title="delete image" (click)="delete(image)">x</button>
     </li>
 </ul>
+-->
+<div *ngIf="images.length">
+    <table mat-table [dataSource]="images" class="mat-elevation-z8">
+      <!--id column-->
+      <ng-container *ngIf="!production" matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let item"><strong>{{ item.id }}</strong></td>
+      </ng-container>  
+      <!--createdAt column-->
+      <ng-container *ngIf="!production" matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef>Created At</th>
+        <td mat-cell *matCellDef="let item"><strong>{{ item.createdAt }}</strong></td>
+      </ng-container>  
+      <!--tokenId column-->
+      <ng-container *ngIf="!production" matColumnDef="tokenId">
+        <th mat-header-cell *matHeaderCellDef>Token Id</th>
+        <td mat-cell *matCellDef="let item"><strong>{{ item.tokenId }}</strong></td>
+      </ng-container>     
+      <!--image column-->
+      <ng-container matColumnDef="url">
+        <th mat-header-cell *matHeaderCellDef>Image</th>
+        <td mat-cell *matCellDef="let item"><img src={{item.url}} alt={{item.url}}></td>
+      </ng-container>  
+      <!--size column-->
+      <ng-container matColumnDef="size">
+        <th mat-header-cell *matHeaderCellDef>Size</th>
+        <td mat-cell *matCellDef="let item" nowrap>{{ item.size/1024/1024 | number:'.2' }} MB</td>
+      </ng-container> 
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+  </table>    
+</div>

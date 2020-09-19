@@ -8,6 +8,8 @@ import { ImageUploaderService } from '../image-uploader.service';
 })
 export class GetImageComponent implements OnInit {
 
+  columnsToDisplay = ['name', 'size'];
+
   constructor(public imageUploaderService: ImageUploaderService) {}
 
   ngOnInit(): void {

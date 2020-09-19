@@ -1,13 +1,13 @@
 <h2><span class="badge"> {{places.length}} </span> Places </h2>
 <nav>
-    <a routerLink="/places/create/{{tripId}}">Add Place</a>
+    <a mat-button routerLink="/places/create/{{tripId}}">Add Place</a>
 </nav>
 <ul class="places">
     <li *ngFor="let place of places">
-        <a routerLink="/places/details/{{place.id}}">
+        <a mat-button routerLink="/places/details/{{place.id}}">
             <span class="badge"> {{place.id}} </span> {{place.name}}
         </a>
-        <button class="delete" title="delete place" (click)="delete(place)">x</button>
+        <button mat-button class="delete" title="delete place" (click)="delete(place)">x</button>
     </li>
 </ul>
 <div

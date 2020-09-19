@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ImageResponse } from '../../models/image-response';
 import { ImageService } from '../image.service';
+import { environment } from'../../../environments/environment';
 
 @Component({
   selector: 'app-images',
@@ -11,9 +12,12 @@ export class ImagesComponent implements OnInit {
 
   @Output() newPictureUrl = new EventEmitter<string>();
 
+  columnsToDisplay = ['id', 'createdAt', 'tokenId', 'url', 'size']
   images : ImageResponse[];
-
-  constructor(private imageService: ImageService) { }
+  production: boolean;
+  constructor(private imageService: ImageService) { 
+    this.production = environment.production;
+  }
 
   ngOnInit(): void {
     this.getImages();

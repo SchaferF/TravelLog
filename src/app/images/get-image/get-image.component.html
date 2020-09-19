@@ -1,6 +1,6 @@
 <div class="container">
     <input type="file" name="file" ng2FileSelect [uploader]="imageUploaderService.uploader" />
-    <button type="button" class="btn btn-success btn-s" 
+    <button mat-button type="button" class="btn btn-success btn-s" 
       (click)="imageUploaderService.uploader.uploadAll()" 
       [disabled]="!imageUploaderService.uploader.getNotUploadedItems().length" >
           Upload
@@ -9,26 +9,33 @@
 <div *ngIf="imageUploaderService.uploader?.queue?.length">
     <h3>Upload queue</h3>
     <p>Queue length: {{imageUploaderService.uploader?.queue?.length }}</p>
-    <table class="table">
+    <table mat-table [dataSource]="imageUploaderService.uploader.queue" class="mat-elevation-z8">
+      <!--name column-->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let item"><strong>{{ item?.file?.name }}</strong></td>
+      </ng-container>  
+      <!--size column-->
+      <ng-container matColumnDef="size">
+        <th mat-header-cell *matHeaderCellDef>Size</th>
+        <td mat-cell *matCellDef="let item" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+      </ng-container> 
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+    <!--
       <thead>
-      <tr>
-          <th width="50%">Name</th>
-          <th>Size</th>
-          <!--<th>Progress</th>-->
+      <tr mat-header-row>
+          <th mat-header-cell width="50%">Name</th>
+          <th mat-header-cell >Size</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let item of imageUploaderService.uploader.queue">
-          <td><strong>{{ item?.file?.name }}</strong></td>
-          <td *ngIf="item" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
-          <!--
-          <td *ngIf="item">
-            <div class="progress" style="margin-bottom: 0;">
-                <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
-            </div>
-          </td>  
-          -->        
+      <tr mat-row *ngFor="let item of imageUploaderService.uploader.queue">
+          <td mat-cell ><strong>{{ item?.file?.name }}</strong></td>
+          <td mat-cell *ngIf="item" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>  
       </tr>
       </tbody>
+    -->
   </table>    
 </div>
