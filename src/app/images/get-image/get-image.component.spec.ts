@@ -1,23 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ImageUploaderService } from '../image-uploader.service';
 
 import { GetImageComponent } from './get-image.component';
 
 describe('GetImageComponent', () => {
   let component: GetImageComponent;
-  let fixture: ComponentFixture<GetImageComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ GetImageComponent ]
-    })
-    .compileComponents();
-  }));
+  let imageUploaderService: ImageUploaderService;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GetImageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    imageUploaderService = new ImageUploaderService();
+    component = new GetImageComponent(imageUploaderService);
   });
+
+  afterEach(() => {
+    imageUploaderService = null;
+    component = null;
+  })
 
   it('should create', () => {
     expect(component).toBeTruthy();

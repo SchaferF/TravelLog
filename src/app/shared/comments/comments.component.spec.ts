@@ -1,22 +1,24 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MockMessageService } from 'src/app/Mock/mock-message-service';
+import { CommentService } from '../services/comment.service';
 
 import { CommentsComponent } from './comments.component';
 
 describe('CommentsComponent', () => {
   let component: CommentsComponent;
-  let fixture: ComponentFixture<CommentsComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ CommentsComponent ]
-    })
-    .compileComponents();
-  }));
+  let commentService: CommentService;
+  let messageService: MockMessageService;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CommentsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    messageService = new MockMessageService();
+    commentService = new CommentService(messageService);
+    component = new CommentsComponent(commentService);
+  });
+
+  afterEach(() => {
+    messageService = null;
+    commentService = null;
+    component = null;
   });
 
   it('should create', () => {
@@ -24,9 +26,9 @@ describe('CommentsComponent', () => {
   });
 
 
-it('should correctly render the passed @Input value', () => {
-  component.placeId = '12345'; // 1
-  expect(component.placeId).toBeTruthy();
-});
+  it('should correctly render the passed @Input value', () => {
+    component.placeId = '12345'; // 1
+    expect(component.placeId).toBeTruthy();
+  });
 
 });

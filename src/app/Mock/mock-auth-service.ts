@@ -1,8 +1,10 @@
-import { AuthService } from'../security/auth.service';
-import { User } from '../models/user'
+import { Injectable } from '@angular/core';
+import { User } from '../models/user';
+import { AuthService } from '../security/auth.service';
 import { Observable } from 'rxjs';
 import { tap, map, retry } from "rxjs/operators";
-
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+@Injectable()
 export class MockAuthService extends AuthService{
     private users: User[] = [
         {'id': '1', 'href' : 'MOCKED_HREF_1', 'name' : 'MOCKED_USER_1', 'tripsCount' : 1, 'createdAt' : '19-09-2020', 'updatedAt' : '19-09-2020'},
@@ -11,7 +13,7 @@ export class MockAuthService extends AuthService{
         ];
 
     isAuthenticated(): Observable<boolean> {
-      return new Observable<boolean>().pipe(map(() => {return (true);}));
+      return new Observable<boolean>().pipe(map(() => {return true;}));
     }
 
     getToken(): Observable<string> {

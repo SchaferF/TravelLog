@@ -1,22 +1,21 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 
-import { MockAuthService } from './mock-auth-service';
+import { MockTripService } from './mock-trip-service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { environment } from '../../environments/environment';
 
-
-describe('MockAuthService', () => {
-  let service: MockAuthService;
+describe('MockTripService', () => {
+  let service: MockTripService;
   let injector: TestBed;
   let httpMock: HttpTestingController;
    
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [MockAuthService]
+      providers: [MockTripService]
     });
     injector = getTestBed();
-    service = injector.get(MockAuthService);
+    service = injector.get(MockTripService);
     httpMock = injector.get(HttpTestingController);
   });
 

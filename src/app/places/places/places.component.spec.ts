@@ -1,22 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MockPlaceService } from 'src/app/Mock/mock-place-service';
 
 import { PlacesComponent } from './places.component';
 
 describe('PlacesComponent', () => {
   let component: PlacesComponent;
-  let fixture: ComponentFixture<PlacesComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ PlacesComponent ]
-    })
-    .compileComponents();
-  }));
+  let placeService: MockPlaceService;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PlacesComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    placeService = new MockPlaceService(null, null);
+    component = new PlacesComponent(placeService);
+  });
+
+  afterEach(() => {
+    placeService = null;
+    component = null;
   });
 
   it('should create', () => {

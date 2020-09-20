@@ -1,25 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
+import { MockRegService } from 'src/app/Mock/mock-reg-service';
 
 import { RegisterPageComponent } from './register-page.component';
 
 describe('RegisterPageComponent', () => {
   let component: RegisterPageComponent;
-  let fixture: ComponentFixture<RegisterPageComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ RegisterPageComponent ]
-    })
-    .compileComponents();
-  }));
+  let router: Router;
+  let regService: MockRegService;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RegisterPageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    regService = new MockRegService(null);
+    router = null;
+    component = new RegisterPageComponent(regService, router);
   });
-
+/*
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+*/
 });

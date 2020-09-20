@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Location} from '@angular/common';
 import { AddPlaceRequest } from '../../models/add-place-request';
 import { PlaceService } from '../place.service';
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { NgForm } from "@angular/forms";
 import { LatLng, latLng, Map, MapOptions, marker, Marker, tileLayer} from 'leaflet';
 import { GeolocationService } from '../../shared/services/geolocation.service'

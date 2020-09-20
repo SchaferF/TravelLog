@@ -22,8 +22,12 @@ import { DeleteButtonComponent } from './security/delete-button/delete-button.co
 import { LoginPageComponent } from './security/login-page/login-page.component';
 import { LogoutButtonComponent } from './security/logout-button/logout-button.component';
 import { RegisterPageComponent } from './security/register-page/register-page.component';
+import { MockAuthService } from './Mock/mock-auth-service';
 
 describe('AppComponent', () => {
+  let authService: MockAuthService;
+  let app: AppComponent;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -51,15 +55,21 @@ describe('AppComponent', () => {
     }).compileComponents();
   }));
 
+  beforeEach(() => {
+    authService = new MockAuthService(null);
+    app = new AppComponent(authService);
+  })
+
+  afterEach(() => {
+    authService = null;
+    app = null;
+  })
+
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
 
   it(`should have as title 'travel-log'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
     expect(app.title).toEqual('travel-log');
   });
 

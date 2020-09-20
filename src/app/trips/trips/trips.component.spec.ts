@@ -1,22 +1,24 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MockAuthService } from 'src/app/Mock/mock-auth-service';
+import { MockTripService } from 'src/app/Mock/mock-trip-service';
 
 import { TripsComponent } from './trips.component';
 
 describe('TripsComponent', () => {
   let component: TripsComponent;
-  let fixture: ComponentFixture<TripsComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ TripsComponent ]
-    })
-    .compileComponents();
-  }));
+  let tripService: MockTripService;
+  let authService: MockAuthService;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TripsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    tripService = new MockTripService(null, null);
+    authService = new MockAuthService(null);
+    component = new TripsComponent(tripService, authService);
+  });
+
+  afterEach(() => {
+    tripService = null;
+    authService = null;
+    component = null;
   });
 
   it('should create', () => {

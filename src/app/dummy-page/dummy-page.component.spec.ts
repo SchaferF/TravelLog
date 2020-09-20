@@ -1,22 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MockUserService } from '../Mock/mock-user-service';
 
 import { DummyPageComponent } from './dummy-page.component';
 
 describe('DummyPageComponent', () => {
   let component: DummyPageComponent;
-  let fixture: ComponentFixture<DummyPageComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ DummyPageComponent ]
-    })
-    .compileComponents();
-  }));
+  let userService: MockUserService;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DummyPageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    userService = new MockUserService(null);
+    component = new DummyPageComponent(userService);
   });
 
   it('should create', () => {

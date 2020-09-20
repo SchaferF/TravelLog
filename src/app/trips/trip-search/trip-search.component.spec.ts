@@ -1,23 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MockTripService } from 'src/app/Mock/mock-trip-service';
 
 import { TripSearchComponent } from './trip-search.component';
 
 describe('TripSearchComponent', () => {
   let component: TripSearchComponent;
-  let fixture: ComponentFixture<TripSearchComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ TripSearchComponent ]
-    })
-    .compileComponents();
-  }));
+  let tripService: MockTripService;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TripSearchComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    tripService = new MockTripService(null, null);
+    component = new TripSearchComponent(tripService);
   });
+
+  afterEach(() => {
+    tripService = null;
+    component = null;
+  })
 
   it('should create', () => {
     expect(component).toBeTruthy();
