@@ -12,7 +12,7 @@ export class ImagesComponent implements OnInit {
 
   @Output() newPictureUrl = new EventEmitter<string>();
 
-  columnsToDisplay = ['id', 'createdAt', 'tokenId', 'url', 'size']
+  columnsToDisplay = ['id', 'createdAt', 'tokenId', 'url', 'size', 'delete']
   images : ImageResponse[];
   production: boolean;
   constructor(private imageService: ImageService) { 
