@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { from, Observable, of } from 'rxjs';
 import { HttpClient } from "@angular/common/http";
-import { tap, map } from "rxjs/operators";
+import { tap, map, catchError } from "rxjs/operators";
+import { HandleError } from '../shared/handle-error';
 
 import { SearchTripResponse } from '../models/search-trip-response';
 import { AddTripRequest } from '../models/add-trip-request';
@@ -14,8 +15,11 @@ import { trimTrailingNulls } from '@angular/compiler/src/render3/view/util';
   providedIn: 'root'
 })
 export class TripService {
+  handleError: HandleError;
 
-  constructor(private http: HttpClient, private messageService: MessageService) { }
+  constructor(private http: HttpClient, private messageService: MessageService) { 
+    this.handleError = new HandleError(messageService);
+  }
 
   /**
    * GET all trips
@@ -29,7 +33,8 @@ export class TripService {
         }
         console.log(`Trips ${response}`);
         return response;
-      })
+      }),
+      catchError(this.handleError.handleError<SearchTripResponse[]>('getTrips', []))
     );
   }
 
@@ -43,7 +48,8 @@ export class TripService {
       map((response) => {
         console.log(`Trip ${response.title} created`);
         return response;
-      })
+      }),
+      catchError(this.handleError.handleError<AddTripResponse>('addTrips'))
     );
   }
 
@@ -53,7 +59,8 @@ export class TripService {
       map((response) => {
         console.log(`Get Trip ${response.title} detail`);
         return response;
-      })
+      }),
+      catchError(this.handleError.handleError<SearchTripResponse>('getTrip'))
     );
   }
 
@@ -63,7 +70,8 @@ export class TripService {
       tap(_ => this.log(`updated trip id=${id}`)),
       map((response) => {
         return response;
-      })
+      }),
+      catchError(this.handleError.handleError('updateTrip'))
     );
   }
 
@@ -72,7 +80,8 @@ export class TripService {
       tap(_ => this.log(`deleted trip id=${id}`)),
       map((response) => {
         return response;
-      })
+      }),
+      catchError(this.handleError.handleError<SearchTripResponse>('deleteTrip'))
     );
   }
 
@@ -83,7 +92,8 @@ export class TripService {
     return this.http.get<SearchTripResponse[]>(`${environment.apiUrl}/trips/?title=${term}`).pipe(
       tap(x => x.length ? 
         this.log(`found trips matching "${term}"`) : 
-        this.log(`no trip matching "${term}"`))
+        this.log(`no trip matching "${term}"`)),
+      catchError(this.handleError.handleError<SearchTripResponse[]>('searchTrips', []))
     );
   }
 

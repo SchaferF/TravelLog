@@ -2,18 +2,20 @@ import { Injectable } from "@angular/core";
 import { Observable, ReplaySubject } from "rxjs";
 import { RegResponse } from "../models/reg-response";
 import { HttpClient } from "@angular/common/http";
-import { tap, map } from "rxjs/operators";
+import { tap, map, catchError } from "rxjs/operators";
 import { User } from "../models/user";
 import { RegRequest } from "../models/reg-request";
 import { environment } from "../../environments/environment";
+import { HandleError } from '../shared/handle-error';
+import { MessageService } from '../shared/services/message.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegService {
-
-  constructor(private http: HttpClient) { 
-
+  private handleError: HandleError;
+  constructor(private http: HttpClient, private messageService: MessageService) { 
+    this.handleError = new HandleError(messageService);
   }
 
   /**
@@ -22,9 +24,14 @@ export class RegService {
   register(regRequest: RegRequest): Observable<RegResponse> {
     return this.http.post<RegResponse>(`${environment.apiUrl}/users`, regRequest).pipe(
       map((response) => {
-        console.log(`User ${response.name} register in`);
+        this.log(`User ${response.name} register in`);
         return response;
-      })
+      }),
+      catchError(this.handleError.handleError<RegResponse>('register'))
     );
+  }
+
+  private log(message: string) {
+    this.messageService.add(message);
   }
 }

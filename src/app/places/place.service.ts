@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { from, Observable, of } from 'rxjs';
 import { HttpClient } from "@angular/common/http";
-import { tap, map } from "rxjs/operators";
+import { tap, map, catchError } from "rxjs/operators";
 import { Point } from 'geojson';
-
+import { HandleError } from '../shared/handle-error';
 import { AddPlaceRequest } from '../models/add-place-request';
 import { AddPlaceResponse } from '../models/add-place-response';
 import { SearchPlaceResponse } from '../models/search-place-response';
@@ -14,8 +14,10 @@ import { environment } from "../../environments/environment";
   providedIn: 'root'
 })
 export class PlaceService {
-
-  constructor(private http: HttpClient, private messageService: MessageService) { }
+  private handleError: HandleError;
+  constructor(private http: HttpClient, private messageService: MessageService) {
+    this.handleError = new HandleError(messageService);
+   }
 
   getPlaces(): Observable<SearchPlaceResponse[]> {
     return this.http.get<SearchPlaceResponse[]>(`${environment.apiUrl}/places`).pipe(
@@ -23,7 +25,8 @@ export class PlaceService {
       map((response) => {
         console.log(`Places ${response}`);
         return response;
-      })
+      }),
+      catchError(this.handleError.handleError<SearchPlaceResponse[]>('getPlaces', []))
     );
   }
 
@@ -33,7 +36,8 @@ export class PlaceService {
       map((response) => {
         console.log(`Places ${response}`);
         return response;
-      })
+      }),
+      catchError(this.handleError.handleError<SearchPlaceResponse[]>('getPlacesByTripId', []))
     )
   }
 
@@ -43,7 +47,8 @@ export class PlaceService {
       map((response) => {
         console.log(`Place ${place.name} created`);
         return response;
-      })
+      }),
+      catchError(this.handleError.handleError<AddPlaceResponse>('addPlace'))
     );
   }
 
@@ -53,7 +58,8 @@ export class PlaceService {
       map((response) => {
           console.log(`Get place ${response.name} details`);
           return response;
-      })
+      }),
+      catchError(this.handleError.handleError<SearchPlaceResponse>('getPlace'))
     );
   }
 
@@ -63,7 +69,8 @@ export class PlaceService {
       tap(_ => this.log(`updated place id=${id}`)),
       map((response) => {
         return response;
-      })
+      }),
+      catchError(this.handleError.handleError('updatePlace'))
     );
   }
 
@@ -72,7 +79,8 @@ export class PlaceService {
       tap(_ => this.log(`deleted place id=${id}`)),
       map((response) => {
         return response;
-      })
+      }),
+      catchError(this.handleError.handleError<SearchPlaceResponse>('deletePlace'))
     );
   }
 
@@ -83,7 +91,8 @@ export class PlaceService {
     return this.http.get<SearchPlaceResponse[]>(`${environment.apiUrl}/places/?name=${term}`).pipe(
       tap(x => x.length ? 
         this.log(`found places matching "${term}"`) : 
-        this.log(`no place matching "${term}"`))
+        this.log(`no place matching "${term}"`)),
+      catchError(this.handleError.handleError<SearchPlaceResponse[]>('searchPlaces', []))
     );
   }
 

@@ -1,9 +1,8 @@
-import { MockDelService } from './mock-del-service';
-import { MockMessageService } from './mock-message-service';
+import { HandleError } from './handle-error';
+import {MockMessageService} from '../Mock/mock-message-service';
 
-describe('MockDelService', () => {
+describe('HandleError', () => {
   let messageService: MockMessageService;
-
   beforeEach(() => {
     messageService = new MockMessageService();
   })
@@ -13,6 +12,6 @@ describe('MockDelService', () => {
   })
 
   it('should create an instance', () => {
-    expect(new MockDelService(null, messageService)).toBeTruthy();
+    expect(new HandleError(messageService)).toBeTruthy();
   });
 });

@@ -2,10 +2,12 @@ import { Injectable } from "@angular/core";
 import { Observable, ReplaySubject } from "rxjs";
 import { AuthResponse } from "../models/auth-response";
 import { HttpClient } from "@angular/common/http";
-import { tap, map } from "rxjs/operators";
+import { tap, map, catchError } from "rxjs/operators";
 import { User } from "../models/user";
 import { AuthRequest } from "../models/auth-request";
 import { environment } from "../../environments/environment";
+import { HandleError } from '../shared/handle-error';
+import { MessageService } from '../shared/services/message.service';
 
 const STORAGE_KEY = "auth";
 
@@ -19,8 +21,10 @@ export class AuthService {
    * It will act as a sort of local "cache" for the AuthResponse object value.
    */
   private authenticated$: ReplaySubject<AuthResponse>;
+  private handleError: HandleError;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private messageService: MessageService) {
+    this.handleError = new HandleError(messageService);
     // Get the credentials from the localStorage when the AuthService is created
     // It will either contains an AuthResponse object of null if it does not exist
     const savedAuth = JSON.parse(
@@ -37,7 +41,8 @@ export class AuthService {
    */
   isAuthenticated(): Observable<boolean> {
     return this.authenticated$.pipe(
-      map((auth) => Boolean(auth))
+      map((auth) => Boolean(auth)),
+      catchError(this.handleError.handleError<boolean>('isAuthenticated'))
     );
   }
 
@@ -46,7 +51,8 @@ export class AuthService {
    */
   getUser(): Observable<User> {
     return this.authenticated$.pipe(
-      map((auth) => (auth ? auth.user : undefined))
+      map((auth) => (auth ? auth.user : undefined)),
+      catchError(this.handleError.handleError<User>('getUser'))
     );
   }
 
@@ -55,7 +61,8 @@ export class AuthService {
    */
   getToken(): Observable<string> {
     return this.authenticated$.pipe(
-      map((auth) => (auth ? auth.token : undefined))
+      map((auth) => (auth ? auth.token : undefined)),
+      catchError(this.handleError.handleError<string>('getToken'))
     );
   }
 
@@ -70,9 +77,10 @@ export class AuthService {
       tap((response) => this.saveAuth(response)),
       map((response) => {
         this.authenticated$.next(response);
-        console.log(`User ${response.user.name} logged in`);
+        this.log(`User ${response.user.name} logged in`);
         return response.user;
-      })
+      }),
+      catchError(this.handleError.handleError<User>('login'))
     );
   }
 
@@ -83,10 +91,14 @@ export class AuthService {
     //Remove the AuthResponse from the localStorage when user logs out
     localStorage.removeItem(STORAGE_KEY);
     this.authenticated$.next(null);
-    console.log("User logged out");
+    this.log("User logged out");
   }
 
   private saveAuth(auth: AuthResponse) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(auth));
+  }
+
+  private log(message: string) {
+    this.messageService.add(message);
   }
 }
