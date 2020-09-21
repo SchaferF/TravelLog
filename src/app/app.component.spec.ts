@@ -23,9 +23,11 @@ import { LoginPageComponent } from './security/login-page/login-page.component';
 import { LogoutButtonComponent } from './security/logout-button/logout-button.component';
 import { RegisterPageComponent } from './security/register-page/register-page.component';
 import { MockAuthService } from './Mock/mock-auth-service';
+import { MockMessageService } from './Mock/mock-message-service';
 
 describe('AppComponent', () => {
   let authService: MockAuthService;
+  let messageService: MockMessageService;
   let app: AppComponent;
 
   beforeEach(async(() => {
@@ -56,11 +58,13 @@ describe('AppComponent', () => {
   }));
 
   beforeEach(() => {
-    authService = new MockAuthService(null);
+    messageService = new MockMessageService();
+    authService = new MockAuthService(null, messageService);
     app = new AppComponent(authService);
   })
 
   afterEach(() => {
+    messageService = null;
     authService = null;
     app = null;
   })

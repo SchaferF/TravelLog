@@ -29,7 +29,6 @@ export class TripSearchComponent implements OnInit {
       debounceTime(300),
       distinctUntilChanged(),
       switchMap((term: string) => this.tripService.searchTrips(term)),
-    );
+    );    
   }
-
 }
