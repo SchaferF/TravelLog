@@ -20,7 +20,7 @@
       <!--createdAt column-->
       <ng-container *ngIf="!production" matColumnDef="createdAt">
         <th mat-header-cell *matHeaderCellDef>Created At</th>
-        <td mat-cell *matCellDef="let item"><strong>{{ item.createdAt }} | Date </strong></td>
+        <td mat-cell *matCellDef="let item"><strong>{{ item.createdAt | date }} </strong></td>
       </ng-container>  
       <!--tokenId column-->
       <ng-container *ngIf="!production" matColumnDef="tokenId">
